@@ -20,32 +20,33 @@
             .two-column-layout {
                 flex-direction: column;
             }
-            
-            .left-column, .right-column {
+
+            .left-column,
+            .right-column {
                 width: 100%;
             }
-            
+
             .right-column {
                 position: relative;
                 margin-top: 20px;
             }
-            
+
             .notes-toc {
                 position: relative;
                 top: 0;
                 width: 100%;
                 margin-bottom: 20px;
             }
-            
+
             .command-card {
                 width: 100%;
             }
-            
+
             pre code {
                 white-space: pre-wrap;
                 word-break: break-word;
             }
-            
+
             /* Add category toggle for mobile */
             .category-toggle {
                 display: block;
@@ -59,98 +60,104 @@
                 margin-bottom: 10px;
                 transition: all 0.3s ease;
             }
-            
+
             .category-toggle i {
                 margin-right: 5px;
             }
-            
+
             .notes-toc .hud-header {
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
             }
-            
+
             .notes-toc ul {
                 max-height: 0;
                 overflow: hidden;
                 transition: max-height 0.5s ease;
             }
-            
+
             .notes-toc.active ul {
                 max-height: 1000px;
             }
         }
-        
+
         /* Mobile-specific styles */
         @media (max-width: 768px) {
             .holographic-hero h1 {
                 font-size: 1.8rem;
             }
-            
+
             .cyber-subtitle span {
                 font-size: 0.9rem;
                 margin: 2px;
             }
-            
+
             .glass-morphism {
                 padding: 15px;
             }
-            
+
             .command-card {
                 padding: 10px;
             }
-            
+
             .card-description p {
                 font-size: 0.9rem;
             }
-            
+
             header nav {
                 width: 100%;
             }
-            
+
             header nav ul.menu {
                 flex-direction: column;
                 width: 100%;
             }
-            
+
             header nav ul.menu li {
                 width: 100%;
                 text-align: center;
             }
-            
+
             .menu-toggle {
                 display: block;
             }
-            
+
             .menu {
                 display: none;
             }
-            
+
             .menu.active {
                 display: flex;
             }
-            
+
             /* Fix for copied button spacing on mobile */
             .card-action {
                 margin-left: 5px;
             }
-            
+
             /* Improve spacing in cards */
             .command-card .card-description {
                 padding: 8px 0;
             }
+
+            .notes-toc {
+
+                display: none;
+            }
         }
-        
+
         /* Extra small devices */
         @media (max-width: 480px) {
             .holographic-hero h1 {
                 font-size: 1.5rem;
             }
-            
-            h2.neon-text, h3.neon-text {
+
+            h2.neon-text,
+            h3.neon-text {
                 font-size: 1.3rem;
             }
-            
+
             .note-section {
                 margin: 20px 0;
             }
@@ -1136,7 +1143,7 @@
                 languages: ['bash'],
                 ignoreUnescapedHTML: true  // Explicitly acknowledge the security implications
             });
-            
+
             // Use the non-deprecated highlightElement method instead of highlightBlock
             document.querySelectorAll('pre code').forEach((el) => {
                 // Sanitize code content to prevent HTML injection
@@ -1147,69 +1154,6 @@
     </script>
     <script src="js/particles.js"></script>
     <script src="js/script.js"></script>
-    <!-- Add mobile menu toggle script -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const menuToggle = document.querySelector('.menu-toggle');
-            const menu = document.querySelector('.menu');
-            const categoryToggle = document.querySelector('.category-toggle');
-            const notesToc = document.querySelector('.notes-toc');
-            
-            if (menuToggle && menu) {
-                menuToggle.addEventListener('click', function() {
-                    menu.classList.toggle('active');
-                });
-            }
-            
-            // Add toggle functionality for categories
-            if (categoryToggle && notesToc) {
-                // On mobile, start with collapsed categories
-                if (window.innerWidth <= 992) {
-                    notesToc.classList.remove('active');
-                } else {
-                    notesToc.classList.add('active');
-                }
-                
-                categoryToggle.addEventListener('click', function() {
-                    notesToc.classList.toggle('active');
-                    
-                    // Change icon based on state
-                    const icon = categoryToggle.querySelector('i');
-                    if (notesToc.classList.contains('active')) {
-                        icon.className = 'fas fa-chevron-up';
-                    } else {
-                        icon.className = 'fas fa-list';
-                    }
-                });
-            }
-            
-            // Initialize clipboard.js
-            const clipboard = new ClipboardJS('.copy-btn');
-            
-            clipboard.on('success', function(e) {
-                // Visual feedback on copy
-                const originalHTML = e.trigger.innerHTML;
-                e.trigger.innerHTML = '<i class="fas fa-check"></i>';
-                
-                setTimeout(function() {
-                    e.trigger.innerHTML = originalHTML;
-                }, 1500);
-                
-                e.clearSelection();
-            });
-            
-            // Handle screen resize
-            window.addEventListener('resize', function() {
-                if (notesToc) {
-                    if (window.innerWidth <= 992 && !categoryToggle.hasAttribute('data-clicked')) {
-                        notesToc.classList.remove('active');
-                    } else if (window.innerWidth > 992) {
-                        notesToc.classList.add('active');
-                    }
-                }
-            });
-        });
-    </script>
 </body>
 
 </html>

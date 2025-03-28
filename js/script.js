@@ -167,3 +167,65 @@ document.addEventListener('DOMContentLoaded', function() {
       });
     });
   });
+
+
+  document.addEventListener('DOMContentLoaded', function() {
+    const menuToggle = document.querySelector('.menu-toggle');
+    const menu = document.querySelector('.menu');
+    const categoryToggle = document.querySelector('.category-toggle');
+    const notesToc = document.querySelector('.notes-toc');
+    
+    if (menuToggle && menu) {
+        menuToggle.addEventListener('click', function() {
+            menu.classList.toggle('active');
+        });
+    }
+    
+    // Add toggle functionality for categories
+    if (categoryToggle && notesToc) {
+        // On mobile, start with collapsed categories
+        if (window.innerWidth <= 992) {
+            notesToc.classList.remove('active');
+        } else {
+            notesToc.classList.add('active');
+        }
+        
+        categoryToggle.addEventListener('click', function() {
+            notesToc.classList.toggle('active');
+            
+            // Change icon based on state
+            const icon = categoryToggle.querySelector('i');
+            if (notesToc.classList.contains('active')) {
+                icon.className = 'fas fa-chevron-up';
+            } else {
+                icon.className = 'fas fa-list';
+            }
+        });
+    }
+    
+    // Initialize clipboard.js
+    const clipboard = new ClipboardJS('.copy-btn');
+    
+    clipboard.on('success', function(e) {
+        // Visual feedback on copy
+        const originalHTML = e.trigger.innerHTML;
+        e.trigger.innerHTML = '<i class="fas fa-check"></i>';
+        
+        setTimeout(function() {
+            e.trigger.innerHTML = originalHTML;
+        }, 1500);
+        
+        e.clearSelection();
+    });
+    
+    // Handle screen resize
+    window.addEventListener('resize', function() {
+        if (notesToc) {
+            if (window.innerWidth <= 992 && !categoryToggle.hasAttribute('data-clicked')) {
+                notesToc.classList.remove('active');
+            } else if (window.innerWidth > 992) {
+                notesToc.classList.add('active');
+            }
+        }
+    });
+});
