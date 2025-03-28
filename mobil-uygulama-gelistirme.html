@@ -1,0 +1,1215 @@
+<!DOCTYPE html>
+<html lang="tr" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Mobil Uygulama Geliştirme Dersi">
+    <title>Mobil Uygulama Geliştirme</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/three-dots@0.3.2/dist/three-dots.min.css">
+    <!-- Add clipboard.js library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.11/clipboard.min.js"></script>
+    <!-- Add responsive styles before closing head tag -->
+    <style>
+        /* Base responsive styles */
+        @media (max-width: 992px) {
+            .two-column-layout {
+                flex-direction: column;
+            }
+            
+            .left-column, .right-column {
+                width: 100%;
+            }
+            
+            .right-column {
+                position: relative;
+                margin-top: 20px;
+            }
+            
+            .notes-toc {
+                position: relative;
+                top: 0;
+                width: 100%;
+                margin-bottom: 20px;
+            }
+            
+            .command-card {
+                width: 100%;
+            }
+            
+            pre code {
+                white-space: pre-wrap;
+                word-break: break-word;
+            }
+            
+            /* Add category toggle for mobile */
+            .category-toggle {
+                display: block;
+                text-align: center;
+                padding: 10px;
+                background: rgba(30, 30, 50, 0.7);
+                border: 1px solid #0ff;
+                color: #0ff;
+                border-radius: 5px;
+                cursor: pointer;
+                margin-bottom: 10px;
+                transition: all 0.3s ease;
+            }
+            
+            .category-toggle i {
+                margin-right: 5px;
+            }
+            
+            .notes-toc .hud-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+            
+            .notes-toc ul {
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.5s ease;
+            }
+            
+            .notes-toc.active ul {
+                max-height: 1000px;
+            }
+        }
+        
+        /* Mobile-specific styles */
+        @media (max-width: 768px) {
+            .holographic-hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .cyber-subtitle span {
+                font-size: 0.9rem;
+                margin: 2px;
+            }
+            
+            .glass-morphism {
+                padding: 15px;
+            }
+            
+            .command-card {
+                padding: 10px;
+            }
+            
+            .card-description p {
+                font-size: 0.9rem;
+            }
+            
+            header nav {
+                width: 100%;
+            }
+            
+            header nav ul.menu {
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            header nav ul.menu li {
+                width: 100%;
+                text-align: center;
+            }
+            
+            .menu-toggle {
+                display: block;
+            }
+            
+            .menu {
+                display: none;
+            }
+            
+            .menu.active {
+                display: flex;
+            }
+            
+            /* Fix for copied button spacing on mobile */
+            .card-action {
+                margin-left: 5px;
+            }
+            
+            /* Improve spacing in cards */
+            .command-card .card-description {
+                padding: 8px 0;
+            }
+        }
+        
+        /* Extra small devices */
+        @media (max-width: 480px) {
+            .holographic-hero h1 {
+                font-size: 1.5rem;
+            }
+            
+            h2.neon-text, h3.neon-text {
+                font-size: 1.3rem;
+            }
+            
+            .note-section {
+                margin: 20px 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="particles-js"></div>
+
+    <div class="theme-toggle">
+        <i class="fas fa-moon"></i>
+        <i class="fas fa-sun"></i>
+        <div class="toggle-ball"></div>
+    </div>
+
+    <header class="glass-morphism">
+        <button class="menu-toggle"><i class="fas fa-bars"></i> Menü</button>
+        <nav>
+            <ul class="menu">
+                <li><a href="index.html">Ana Sayfa</a></li>
+                <li><a href="mobil-uygulama-gelistirme.html" class="active">Mobil Uygulama Geliştirme</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="holographic-hero">
+            <div class="hero-content">
+                <h1 class="glitch-text" data-text="Mobil Uygulama Geliştirme">Mobil Uygulama Geliştirme</h1>
+                <div class="cyber-subtitle">
+                    <span>Android</span>
+                    <span>ADB</span>
+                    <span>Development</span>
+                </div>
+            </div>
+            <div class="floating-shapes">
+                <div class="shape shape1"></div>
+                <div class="shape shape2"></div>
+                <div class="shape shape3"></div>
+            </div>
+        </section>
+
+        <section id="ders-konusu" class="glass-morphism section-parallax">
+            <h2 class="neon-text">Dersin Konusu</h2>
+            <p>Bu derste mobil uygulama geliştirme hakkında temel kavramlar, kullanılan araçlar, frameworkler ve örnek
+                uygulamalar ele alınacaktır.</p>
+        </section>
+
+        <!-- ADB Komutları Notları -->
+        <section id="adb-notes" class="glass-morphism">
+            <div class="two-column-layout">
+                <!-- Left Column - Content -->
+                <div class="left-column">
+                    <!-- Her bölüm için notların detaylandırılması -->
+                    <article id="adb-sunucu" class="note-section">
+                        <h3 class="neon-text">A. ADB Sunucu Yönetimi</h3>
+                        <div class="command-card glass-morphism">
+                            <pre><code class="language-bash">adb kill-server</code></pre>
+                            <div class="card-description">
+                                <p>- ADB sunucusunu sonlandırır.</p>
+                                <p>- Arka planda çalışan ADB işlemlerini durdurur.</p>
+                            </div>
+                            <div class="card-action">
+                                <button class="copy-btn" data-clipboard-text="adb kill-server"><i
+                                        class="fas fa-copy"></i></button>
+                            </div>
+                        </div>
+                        <div class="command-card glass-morphism">
+                            <pre><code class="language-bash">adb start-server</code></pre>
+                            <div class="card-description">
+                                <p>- ADB sunucusunu başlatır.</p>
+                                <p>- Cihazlarla iletişimi yeniden başlatır.</p>
+                            </div>
+                            <div class="card-action">
+                                <button class="copy-btn" data-clipboard-text="adb start-server"><i
+                                        class="fas fa-copy"></i></button>
+                            </div>
+                        </div>
+                        <div class="command-card glass-morphism">
+                            <pre><code class="language-bash">adb root</code></pre>
+                            <div class="card-description">
+                                <p>- ADB’yi root (yönetici) yetkisiyle yeniden başlatır.</p>
+                                <p>- Bazı komutların çalışması için gerekebilir.</p>
+                            </div>
+                            <div class="card-action">
+                                <button class="copy-btn" data-clipboard-text="adb root"><i
+                                        class="fas fa-copy"></i></button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article id="adb-yeniden-baslatma" class="note-section">
+                        <h3 class="neon-text">B. ADB Yeniden Başlatma Komutları</h3>
+                        <div class="command-card glass-morphism">
+                            <pre><code class="language-bash">adb reboot</code></pre>
+                            <div class="card-description">
+                                <p>- Cihazı normal şekilde yeniden başlatır.</p>
+                            </div>
+                            <div class="card-action">
+                                <button class="copy-btn" data-clipboard-text="adb reboot"><i
+                                        class="fas fa-copy"></i></button>
+                            </div>
+                        </div>
+                        <div class="command-card glass-morphism">
+                            <pre><code class="language-bash">adb reboot recovery</code></pre>
+                            <div class="card-description">
+                                <p>- Cihazı recovery (kurtarma) modunda yeniden başlatır.</p>
+                            </div>
+                            <div class="card-action">
+                                <button class="copy-btn" data-clipboard-text="adb reboot recovery"><i
+                                        class="fas fa-copy"></i></button>
+                            </div>
+                        </div>
+                        <div class="command-card glass-morphism">
+                            <pre><code class="language-bash">adb reboot-bootloader</code></pre>
+                            <div class="card-description">
+                                <p>- Cihazı bootloader (önyükleyici) moduna alır.</p>
+                                <p>- Genellikle ROM flash işlemleri için kullanılır.</p>
+                            </div>
+                            <div class="card-action">
+                                <button class="copy-btn" data-clipboard-text="adb reboot-bootloader"><i
+                                        class="fas fa-copy"></i></button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article id="adb-shell" class="note-section">
+                        <h3 class="neon-text">C. ADB Shell ve Cihaz Üzerinde Komut Çalıştırma</h3>
+                        <div class="command-card glass-morphism">
+                            <pre><code class="language-bash">adb shell</code></pre>
+                            <div class="card-description">
+                                <p>- Cihaz üzerinde bir terminal oturumu açar.</p>
+                                <p>- Doğrudan cihazın komut satırında komutlar çalıştırabilirsiniz.</p>
+                            </div>
+                            <div class="card-action">
+                                <button class="copy-btn" data-clipboard-text="adb shell"><i
+                                        class="fas fa-copy"></i></button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article id="cihaz-baglanti" class="note-section">
+                        <h3 class="neon-text">D. Cihaz Bağlantısı ve Bilgi Alma</h3>
+                        <div class="command-card glass-morphism">
+                            <pre><code class="language-bash">adb usb</code></pre>
+                            <div class="card-description">
+                                <p>- USB üzerinden bağlantı kurmayı sağlar.</p>
+                            </div>
+                            <div class="card-action">
+                                <button class="copy-btn" data-clipboard-text="adb usb"><i
+                                        class="fas fa-copy"></i></button>
+                            </div>
+                        </div>
+                        <div class="command-card glass-morphism">
+                            <pre><code class="language-bash">adb devices</code></pre>
+                            <div class="card-description">
+                                <p>- Bağlı cihazların listesini görüntüler.</p>
+                                <p>- <code>adb devices -l</code> ile cihazların detaylı bilgileri de listelenir.</p>
+                            </div>
+                            <div class="card-action">
+                                <button class="copy-btn" data-clipboard-text="adb devices"><i
+                                        class="fas fa-copy"></i></button>
+                            </div>
+                        </div>
+                        <div class="command-card glass-morphism">
+                            <pre><code class="language-bash">adb connect [ip_adresi]</code></pre>
+                            <div class="card-description">
+                                <p>- Belirtilen IP adresine sahip cihazla kablosuz bağlantı kurar.</p>
+                            </div>
+                            <div class="card-action">
+                                <button class="copy-btn" data-clipboard-text="adb connect [ip_adresi]"><i
+                                        class="fas fa-copy"></i></button>
+                            </div>
+                        </div>
+                        <div class="command-card glass-morphism">
+                            <pre><code class="language-bash">adb shell getprop ro.build.version.release</code></pre>
+                            <div class="card-description">
+                                <p>- Cihazın yüklü olan Android sürümünü getirir.</p>
+                            </div>
+                            <div class="card-action">
+                                <button class="copy-btn"
+                                    data-clipboard-text="adb shell getprop ro.build.version.release"><i
+                                        class="fas fa-copy"></i></button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article id="logcat" class="note-section">
+                        <h3 class="neon-text">E. Logcat ve Hata Raporlama</h3>
+                        <div class="command-card glass-morphism">
+                            <pre><code class="language-bash">adb logcat</code></pre>
+                            <div class="card-description">
+                                <p>- Cihazın log çıktısını gerçek zamanlı gösterir.</p>
+                                <p>- Hata ayıklama sırasında logları takip etmek için kullanılır.</p>
+                            </div>
+                            <div class="card-action">
+                                <button class="copy-btn" data-clipboard-text="adb logcat"><i
+                                        class="fas fa-copy"></i></button>
+                            </div>
+                        </div>
+                        <div class="command-card glass-morphism">
+                            <pre><code class="language-bash">adb logcat -c</code></pre>
+                            <div class="card-description">
+                                <p>- Cihazdaki mevcut logları temizler.</p>
+                                <p>- Temiz bir log dosyası ile çalışmak için yararlıdır.</p>
+                            </div>
+                            <div class="card-action">
+                                <button class="copy-btn" data-clipboard-text="adb logcat -c"><i
+                                        class="fas fa-copy"></i></button>
+                            </div>
+                        </div>
+                        <div class="command-card glass-morphism">
+                            <pre><code class="language-bash">adb logcat -d &gt; [dosya_yolu]</code></pre>
+                            <div class="card-description">
+                                <p>- Logcat çıktısını belirtilen dosyaya kaydeder.</p>
+                            </div>
+                            <div class="card-action">
+                                <button class="copy-btn" data-clipboard-text="adb logcat -d &gt; [dosya_yolu]"><i
+                                        class="fas fa-copy"></i></button>
+                            </div>
+                        </div>
+                        <div class="command-card glass-morphism">
+                            <pre><code class="language-bash">adb bugreport &gt; [dosya_yolu]</code></pre>
+                            <div class="card-description">
+                                <p>- Cihazın tüm sistem bilgilerini, loglarını, dumpsys ve dumpstate çıktısını içeren
+                                    raporu dosyaya yazar.</p>
+                            </div>
+                            <div class="card-action">
+                                <button class="copy-btn" data-clipboard-text="adb bugreport &gt; [dosya_yolu]"><i
+                                        class="fas fa-copy"></i></button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article id="dosya-transferi" class="note-section">
+                        <h3 class="neon-text">F. Dosya Transferi Komutları</h3>
+                        <div class="command-card glass-morphism">
+                            <pre><code class="language-bash">adb push [kaynak] [hedef]</code></pre>
+                            <div class="card-description">
+                                <p>- Bilgisayardan cihaza dosya kopyalamak için kullanılır.</p>
+                            </div>
+                            <div class="card-action">
+                                <button class="copy-btn" data-clipboard-text="adb push [kaynak] [hedef]"><i
+                                        class="fas fa-copy"></i></button>
+                            </div>
+                        </div>
+                        <div class="command-card glass-morphism">
+                            <pre><code class="language-bash">adb pull [cihaz_dosya_yolu] [yerel_yol]</code></pre>
+                            <div class="card-description">
+                                <p>- Cihazdaki dosyayı bilgisayara kopyalar.</p>
+                            </div>
+                            <div class="card-action">
+                                <button class="copy-btn"
+                                    data-clipboard-text="adb pull [cihaz_dosya_yolu] [yerel_yol]"><i
+                                        class="fas fa-copy"></i></button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article id="uygulama-kurma" class="note-section">
+                        <h3 class="neon-text">G. Uygulama Kurma ve Kaldırma</h3>
+                        <div class="command-card glass-morphism">
+                            <pre><code class="language-bash">adb -e install path/to/app.apk</code></pre>
+                            <div class="card-description">
+                                <p>- Emülatöre uygulama yükler.</p>
+                            </div>
+                            <div class="card-action">
+                                <button class="copy-btn" data-clipboard-text="adb -e install path/to/app.apk"><i
+                                        class="fas fa-copy"></i></button>
+                            </div><br>
+                            <p>Uygulama kurulumu için ek bayraklar:</p>
+                            <ul style="list-style-type: none; padding-left: 0;">
+                                <li><code>-d</code>: Sadece USB bağlı cihaza yönlendirir.</li>
+                                <li><code>-e</code>: Sadece emülatöre yönlendirir.</li>
+                                <li><code>-s &lt;seri numarası&gt;</code>: Belirli bir cihaza yükleme yapar.</li>
+                                <li><code>-p &lt;ürün adı veya yol&gt;</code>: Ürüne veya cihaza özel seçenek verir.
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="command-card glass-morphism">
+                            <pre><code class="language-bash">adb devices | tail -n +2 | cut -sf 1 | xargs -IX adb -s X install -r com.myAppPackage</code></pre>
+                            <div class="card-description">
+                                <p>- Bu komut, bağlı tüm cihazlara uygulamayı yeniden kurar (-r: verileri korur).</p>
+                            </div>
+                            <div class="card-action">
+                                <button class="copy-btn"
+                                    data-clipboard-text="adb devices | tail -n +2 | cut -sf 1 | xargs -IX adb -s X install -r com.myAppPackage"><i
+                                        class="fas fa-copy"></i></button>
+                            </div>
+                        </div>
+                        <div class="command-card glass-morphism">
+                            <pre><code class="language-bash">adb uninstall com.myAppPackage</code></pre>
+                            <div class="card-description">
+                                <p>- Belirtilen paket adındaki uygulamayı kaldırır.</p>
+                            </div>
+                            <div class="card-action">
+                                <button class="copy-btn" data-clipboard-text="adb uninstall com.myAppPackage"><i
+                                        class="fas fa-copy"></i></button>
+                            </div>
+                        </div>
+                        <div class="command-card glass-morphism">
+                            <pre><code class="language-bash">adb uninstall -k &lt;apk_adı&gt;</code></pre>
+                            <div class="card-description">
+                                <p>- Uygulamayı kaldırırken verileri saklar.</p>
+                            </div>
+                            <div class="card-action">
+                                <button class="copy-btn" data-clipboard-text="adb uninstall -k &lt;apk_adı&gt;"><i
+                                        class="fas fa-copy"></i></button>
+                            </div>
+                        </div>
+                        <div class="command-card glass-morphism">
+                            <pre><code class="language-bash">adb shell pm uninstall com.example.MyApp</code></pre>
+                            <div class="card-description">
+                                <p>- Alternatif olarak cihaz üzerinden uygulamayı kaldırır.</p>
+                            </div>
+                            <div class="card-action">
+                                <button class="copy-btn"
+                                    data-clipboard-text="adb shell pm uninstall com.example.MyApp"><i
+                                        class="fas fa-copy"></i></button>
+                            </div>
+                        </div>
+                        <div class="command-card glass-morphism">
+                            <pre><code class="language-bash">adb shell pm clear [paket_adı]</code></pre>
+                            <div class="card-description">
+                                <p>- Uygulamanın tüm verilerini temizler.</p>
+                            </div>
+                            <div class="card-action">
+                                <button class="copy-btn" data-clipboard-text="adb shell pm clear [paket_adı]"><i
+                                        class="fas fa-copy"></i></button>
+                            </div>
+                        </div>
+                        <div class="command-card glass-morphism">
+                            <pre><code class="language-bash">adb devices | tail -n +2 | cut -sf 1 | xargs -IX adb -s X uninstall com.myAppPackage</code></pre>
+                            <div class="card-description">
+                                <p>- Toplu kaldırma örneği.</p>
+                            </div>
+                            <div class="card-action">
+                                <button class="copy-btn"
+                                    data-clipboard-text="adb devices | tail -n +2 | cut -sf 1 | xargs -IX adb -s X uninstall com.myAppPackage"><i
+                                        class="fas fa-copy"></i></button>
+                            </div>
+                        </div>
+                        <div class="command-card glass-morphism">
+                            <pre><code class="language-bash">adb install -r yourApp.apk</code></pre>
+                            <div class="card-description">
+                                <p>- Uygulamayı verileri koruyarak yeniden kurar.</p>
+                            </div>
+                            <div class="card-action">
+                                <button class="copy-btn" data-clipboard-text="adb install -r yourApp.apk"><i
+                                        class="fas fa-copy"></i></button>
+                            </div>
+                        </div>
+                        <div class="command-card glass-morphism">
+                            <pre><code class="language-bash">adb install –k &lt;apk_yolu&gt;</code></pre>
+                            <div class="card-description">
+                                <p>- Alternatif güncelleme yöntemi; uygulama verilerini saklar.</p>
+                            </div>
+                            <div class="card-action">
+                                <button class="copy-btn" data-clipboard-text="adb install –k &lt;apk_yolu&gt;"><i
+                                        class="fas fa-copy"></i></button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article id="aktivite" class="note-section">
+                        <h3 class="neon-text">H. Aktivite Yönetimi ve Intent İşlemleri</h3>
+                        <div class="command-card glass-morphism">
+                            <pre><code class="language-bash">adb shell am start -W -c android.intent.category.HOME -a android.intent.action.MAIN</code></pre>
+                            <div class="card-description">
+                                <p>- Cihazın ana ekranını (launcher) başlatır.</p>
+                            </div>
+                            <div class="card-action">
+                                <button class="copy-btn"
+                                    data-clipboard-text="adb shell am start -W -c android.intent.category.HOME -a android.intent.action.MAIN"><i
+                                        class="fas fa-copy"></i></button>
+                            </div>
+                        </div>
+                        <div class="command-card glass-morphism">
+                            <pre><code class="language-bash">adb shell am start -a android.intent.action.VIEW</code></pre>
+                            <div class="card-description">
+                                <p>- Belirtilen aksiyonla bir aktivite başlatır (örneğin, URL açma).</p>
+                            </div>
+                            <div class="card-action">
+                                <button class="copy-btn"
+                                    data-clipboard-text="adb shell am start -a android.intent.action.VIEW"><i
+                                        class="fas fa-copy"></i></button>
+                            </div>
+                        </div>
+                        <div class="command-card glass-morphism">
+                            <pre><code class="language-bash">adb shell am broadcast -a 'my_action'</code></pre>
+                            <div class="card-description">
+                                <p>- Özel bir aksiyonu tüm uygulamalara yayınlar.</p>
+                            </div>
+                            <div class="card-action">
+                                <button class="copy-btn" data-clipboard-text="adb shell am broadcast -a 'my_action'"><i
+                                        class="fas fa-copy"></i></button>
+                            </div>
+                        </div>
+                        <div class="command-card glass-morphism">
+                            <pre><code class="language-bash">adb shell am start -a android.intent.action.CALL -d tel:+905551234567</code></pre>
+                            <div class="card-description">
+                                <p>- Belirtilen numaraya telefon çağrısı başlatır.</p>
+                            </div>
+                            <div class="card-action">
+                                <button class="copy-btn"
+                                    data-clipboard-text="adb shell am start -a android.intent.action.CALL -d tel:+905551234567"><i
+                                        class="fas fa-copy"></i></button>
+                            </div>
+                        </div>
+                        <div class="command-card glass-morphism">
+                            <pre><code class="language-bash">adb shell am start -a android.intent.action.SENDTO -d sms:+972527300294 --es sms_body "Test --ez exit_on_sent false"</code></pre>
+                            <div class="card-description">
+                                <p>- SMS gönderme ekranını açar ve mesajı önceden doldurur.</p>
+                            </div>
+                            <div class="card-action">
+                                <button class="copy-btn"
+                                    data-clipboard-text="adb shell am start -a android.intent.action.SENDTO -d sms:+972527300294 --es sms_body 'Test --ez exit_on_sent false'"><i
+                                        class="fas fa-copy"></i></button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article id="izin-yonetimi" class="note-section">
+                        <h3 class="neon-text">I. İzin Yönetimi ve Cihaz Emülasyonu</h3>
+                        <div class="command-card glass-morphism">
+                            <pre><code class="language-bash">adb shell pm reset-permissions -p your.app.package</code></pre>
+                            <div class="card-description">
+                                <p>- Uygulamanın mevcut izinlerini sıfırlar.</p>
+                            </div>
+                            <div class="card-action">
+                                <button class="copy-btn"
+                                    data-clipboard-text="adb shell pm reset-permissions -p your.app.package"><i
+                                        class="fas fa-copy"></i></button>
+                            </div>
+                        </div>
+                        <div class="command-card glass-morphism">
+                            <pre><code class="language-bash">adb shell pm grant [paket_adı] [izin]</code></pre>
+                            <div class="card-description">
+                                <p>- Belirtilen uygulamaya izin verir.</p>
+                            </div>
+                            <div class="card-action">
+                                <button class="copy-btn" data-clipboard-text="adb shell pm grant [paket_adı] [izin]"><i
+                                        class="fas fa-copy"></i></button>
+                            </div>
+                        </div>
+                        <div class="command-card glass-morphism">
+                            <pre><code class="language-bash">adb shell pm revoke [paket_adı] [izin]</code></pre>
+                            <div class="card-description">
+                                <p>- Uygulamadan izni geri alır.</p>
+                            </div>
+                            <div class="card-action">
+                                <button class="copy-btn" data-clipboard-text="adb shell pm revoke [paket_adı] [izin]"><i
+                                        class="fas fa-copy"></i></button>
+                            </div>
+                        </div>
+                        <div class="command-card glass-morphism">
+                            <pre><code class="language-bash">adb shell wm size 2048x1536</code></pre>
+                            <div class="card-description">
+                                <p>- Cihazın ekran çözünürlüğünü değiştirir.</p>
+                            </div>
+                            <div class="card-action">
+                                <button class="copy-btn" data-clipboard-text="adb shell wm size 2048x1536"><i
+                                        class="fas fa-copy"></i></button>
+                            </div>
+                        </div>
+                        <div class="command-card glass-morphism">
+                            <pre><code class="language-bash">adb shell wm density 288</code></pre>
+                            <div class="card-description">
+                                <p>- Ekran yoğunluğunu (dpi) ayarlar.</p>
+                            </div>
+                            <div class="card-action">
+                                <button class="copy-btn" data-clipboard-text="adb shell wm density 288"><i
+                                        class="fas fa-copy"></i></button>
+                            </div>
+                        </div>
+                        <div class="command-card glass-morphism">
+                            <pre><code class="language-bash">adb shell wm size reset</code></pre>
+                            <div class="card-description">
+                                <p>- Varsayılan ekran ayarlarına döner.</p>
+                            </div>
+                            <div class="card-action">
+                                <button class="copy-btn" data-clipboard-text="adb shell wm size reset"><i
+                                        class="fas fa-copy"></i></button>
+                            </div>
+                        </div>
+                        <div class="command-card glass-morphism">
+                            <pre><code class="language-bash">adb shell wm density reset</code></pre>
+                            <div class="card-description">
+                                <p>- Varsayılan ekran yoğunluğuna döner.</p>
+                            </div>
+                            <div class="card-action">
+                                <button class="copy-btn" data-clipboard-text="adb shell wm density reset"><i
+                                        class="fas fa-copy"></i></button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article id="metin-girisi" class="note-section">
+                        <h3 class="neon-text">J. Metin Girişi ve Klavye Olayları</h3>
+                        <div class="command-card glass-morphism">
+                            <pre><code class="language-bash">adb shell input text 'Mesajınız'</code></pre>
+                            <div class="card-description">
+                                <p>- Cihaza metin girdisi gönderir.</p>
+                            </div>
+                            <div class="card-action">
+                                <button class="copy-btn" data-clipboard-text="adb shell input text 'Mesajınız'"><i
+                                        class="fas fa-copy"></i></button>
+                            </div>
+                        </div>
+                        <div class="command-card glass-morphism">
+                            <pre><code class="language-bash">adb shell input keyevent 3</code></pre>
+                            <div class="card-description">
+                                <p>- Ana ekran (home) butonuna basar.</p>
+                            </div>
+                            <div class="card-action">
+                                <button class="copy-btn" data-clipboard-text="adb shell input keyevent 3"><i
+                                        class="fas fa-copy"></i></button>
+                            </div>
+                        </div>
+                        <div class="command-card glass-morphism">
+                            <pre><code class="language-bash">adb shell input keyevent 4</code></pre>
+                            <div class="card-description">
+                                <p>- Geri butonuna basar.</p>
+                            </div>
+                            <div class="card-action">
+                                <button class="copy-btn" data-clipboard-text="adb shell input keyevent 4"><i
+                                        class="fas fa-copy"></i></button>
+                            </div>
+                        </div>
+                        <div class="command-card glass-morphism">
+                            <pre><code class="language-bash">adb shell input keyevent 66</code></pre>
+                            <div class="card-description">
+                                <p>- Enter tuşuna basar.</p>
+                            </div>
+                            <div class="card-action">
+                                <button class="copy-btn" data-clipboard-text="adb shell input keyevent 66"><i
+                                        class="fas fa-copy"></i></button>
+                            </div>
+                        </div>
+                        <div class="command-card glass-morphism">
+                            <pre><code class="language-bash">adb shell input keyevent 67</code></pre>
+                            <div class="card-description">
+                                <p>- Silme (backspace) işlemi yapar.</p>
+                            </div>
+                            <div class="card-action">
+                                <button class="copy-btn" data-clipboard-text="adb shell input keyevent 67"><i
+                                        class="fas fa-copy"></i></button>
+                            </div>
+                        </div>
+                        <div class="command-card glass-morphism">
+                            <pre><code class="language-bash">adb shell input keyevent 26</code></pre>
+                            <div class="card-description">
+                                <p>- Güç düğmesi (açma/kapama)</p>
+                            </div>
+                            <div class="card-action">
+                                <button class="copy-btn" data-clipboard-text="adb shell input keyevent 26"><i
+                                        class="fas fa-copy"></i></button>
+                            </div>
+                        </div>
+                        <div class="command-card glass-morphism">
+                            <pre><code class="language-bash">adb shell input keyevent 27</code></pre>
+                            <div class="card-description">
+                                <p>- Kamera tuşu</p>
+                            </div>
+                            <div class="card-action">
+                                <button class="copy-btn" data-clipboard-text="adb shell input keyevent 27"><i
+                                        class="fas fa-copy"></i></button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article id="ekran-goruntusu" class="note-section">
+                        <h3 class="neon-text">K. Ekran Görüntüsü Alma ve Video Kaydı</h3>
+                        <div class="command-card glass-morphism">
+                            <pre><code class="language-bash">adb shell screencap -p /sdcard/screenshot.png</code></pre>
+                            <div class="card-description">
+                                <p>- Cihazın ekran görüntüsünü belirtilen dosya yoluna kaydeder.</p>
+                            </div>
+                            <div class="card-action">
+                                <button class="copy-btn"
+                                    data-clipboard-text="adb shell screencap -p /sdcard/screenshot.png"><i
+                                        class="fas fa-copy"></i></button>
+                            </div>
+                        </div>
+                        <div class="command-card glass-morphism">
+                            <pre><code class="language-bash">adb pull /sdcard/screenshot.png</code></pre>
+                            <div class="card-description">
+                                <p>- Alınan ekran görüntüsünü bilgisayarınıza kopyalar.</p>
+                            </div>
+                            <div class="card-action">
+                                <button class="copy-btn" data-clipboard-text="adb pull /sdcard/screenshot.png"><i
+                                        class="fas fa-copy"></i></button>
+                            </div>
+                        </div>
+                        <div class="command-card glass-morphism">
+                            <pre><code class="language-bash">adb.exe exec-out screencap -p > screen.jpg</code></pre>
+                            <div class="card-description">
+                                <p>- Komut satırından direkt olarak görüntüyü bir dosyaya aktarır.</p>
+                            </div>
+                            <div class="card-action">
+                                <button class="copy-btn"
+                                    data-clipboard-text="adb.exe exec-out screencap -p > screen.jpg"><i
+                                        class="fas fa-copy"></i></button>
+                            </div>
+                        </div>
+                        <div class="command-card glass-morphism">
+                            <pre><code class="language-bash">adb shell screenrecord /sdcard/demo.mp4</code></pre>
+                            <div class="card-description">
+                                <p>- Cihazın ekranını video olarak kaydeder.</p>
+                                <p>- Kaydı durdurmak için Ctrl+C kullanılır.</p>
+                            </div>
+                            <div class="card-action">
+                                <button class="copy-btn"
+                                    data-clipboard-text="adb shell screenrecord /sdcard/demo.mp4"><i
+                                        class="fas fa-copy"></i></button>
+                            </div>
+                        </div>
+                        <div class="command-card glass-morphism">
+                            <pre><code class="language-bash">adb shell "am start -a android.media.action.VIDEO_CAPTURE"</code></pre>
+                            <div class="card-description">
+                                <p>- Video kaydı başlatır.</p>
+                            </div>
+                            <div class="card-action">
+                                <button class="copy-btn"
+                                    data-clipboard-text="adb shell 'am start -a android.media.action.VIDEO_CAPTURE'"><i
+                                        class="fas fa-copy"></i></button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article id="yedekleme" class="note-section">
+                        <h3 class="neon-text">L. Yedekleme, Geri Yükleme ve Sideload İşlemleri</h3>
+                        <div class="command-card glass-morphism">
+                            <pre><code class="language-bash">adb backup -apk -all -f backup.ab</code></pre>
+                            <div class="card-description">
+                                <p>- Tüm uygulamaları ve ayarları yedekler.</p>
+                            </div>
+                            <div class="card-action">
+                                <button class="copy-btn" data-clipboard-text="adb backup -apk -all -f backup.ab"><i
+                                        class="fas fa-copy"></i></button>
+                            </div>
+                        </div>
+                        <div class="command-card glass-morphism">
+                            <pre><code class="language-bash">adb backup -apk -shared -all -f backup.ab</code></pre>
+                            <div class="card-description">
+                                <p>- Uygulama verileri ve paylaşılan dosyaları yedekler.</p>
+                            </div>
+                            <div class="card-action">
+                                <button class="copy-btn"
+                                    data-clipboard-text="adb backup -apk -shared -all -f backup.ab"><i
+                                        class="fas fa-copy"></i></button>
+                            </div>
+                        </div>
+                        <div class="command-card glass-morphism">
+                            <pre><code class="language-bash">adb backup -apk -nosystem -all -f backup.ab</code></pre>
+                            <div class="card-description">
+                                <p>- Sadece sistem dışı (kullanıcı) uygulamaları yedekler.</p>
+                            </div>
+                            <div class="card-action">
+                                <button class="copy-btn"
+                                    data-clipboard-text="adb backup -apk -nosystem -all -f backup.ab"><i
+                                        class="fas fa-copy"></i></button>
+                            </div>
+                        </div>
+                        <div class="command-card glass-morphism">
+                            <pre><code class="language-bash">adb restore backup.ab</code></pre>
+                            <div class="card-description">
+                                <p>- Daha önce alınmış yedeği cihaza geri yükler.</p>
+                            </div>
+                            <div class="card-action">
+                                <button class="copy-btn" data-clipboard-text="adb restore backup.ab"><i
+                                        class="fas fa-copy"></i></button>
+                            </div>
+                        </div>
+                        <div class="command-card glass-morphism">
+                            <pre><code class="language-bash">adb sideload</code></pre>
+                            <div class="card-description">
+                                <p>- Bilgisayarınızdan cihaza özel ROM veya zip dosyalarını yüklemek için kullanılır.
+                                </p>
+                            </div>
+                            <div class="card-action">
+                                <button class="copy-btn" data-clipboard-text="adb sideload"><i
+                                        class="fas fa-copy"></i></button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article id="fastboot" class="note-section">
+                        <h3 class="neon-text">M. Fastboot Komutları</h3>
+                        <div class="command-card glass-morphism">
+                            <pre><code class="language-bash">fastboot devices</code></pre>
+                            <div class="card-description">
+                                <p>- Bootloader modunda bağlı cihazları listeler.</p>
+                                <p>- ADB'nin bootloader modundaki eşdeğeridir.</p>
+                            </div>
+                            <div class="card-action">
+                                <button class="copy-btn" data-clipboard-text="fastboot devices"><i
+                                        class="fas fa-copy"></i></button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article id="shared-pref" class="note-section">
+                        <h3 class="neon-text">N. Shared Preferences İşlemleri</h3>
+                        <div class="command-card glass-morphism">
+                            <pre><code class="language-bash">adb shell 'am broadcast -a org.example.app.sp.PUT --es key key_name --es value "hello world!"'</code></pre>
+                            <div class="card-description">
+                                <p>- Uygulamanın varsayılan shared preferences dosyasına "hello world!" değeri ekler.
+                                </p>
+                            </div>
+                            <div class="card-action">
+                                <button class="copy-btn"
+                                    data-clipboard-text="adb shell 'am broadcast -a org.example.app.sp.PUT --es key key_name --es value \"
+                                    hello world!\"'"><i class="fas fa-copy"></i></button>
+                            </div>
+                        </div>
+                        <div class="command-card glass-morphism">
+                            <pre><code class="language-bash">adb shell 'am broadcast -a org.example.app.sp.REMOVE --es key key_name'</code></pre>
+                            <div class="card-description">
+                                <p>- Belirtilen anahtarla kayıtlı değeri siler.</p>
+                            </div>
+                            <div class "card-action">
+                                <button class="copy-btn"
+                                    data-clipboard-text="adb shell 'am broadcast -a org.example.app.sp.REMOVE --es key key_name'"><i
+                                        class="fas fa-copy"></i></button>
+                            </div>
+                        </div>
+                        <div class="command-card glass-morphism">
+                            <pre><code class="language-bash">adb shell 'am broadcast -a org.example.app.sp.CLEAR --es key key_name'</code></pre>
+                            <div class="card-description">
+                                <p>- Shared preferences içeriğini temizler.</p>
+                            </div>
+                            <div class="card-action">
+                                <button class="copy-btn"
+                                    data-clipboard-text="adb shell 'am broadcast -a org.example.app.sp.CLEAR --es key key_name'"><i
+                                        class="fas fa-copy"></i></button>
+                            </div>
+                        </div>
+                        <div class="command-card glass-morphism">
+                            <pre><code class="language-bash">adb shell 'am broadcast -a org.example.app.sp.CLEAR --ez restart true'</code></pre>
+                            <div class="card-description">
+                                <p>- Değişikliklerin aktif olması için uygulamayı yeniden başlatır.</p>
+                            </div>
+                            <div class="card-action">
+                                <button class="copy-btn"
+                                    data-clipboard-text="adb shell 'am broadcast -a org.example.app.sp.CLEAR --ez restart true'"><i
+                                        class="fas fa-copy"></i></button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article id="monkey" class="note-section">
+                        <h3 class="neon-text">O. Monkey Test Aracı</h3>
+                        <div class="command-card glass-morphism">
+                            <pre><code class="language-bash">adb shell monkey -p com.myAppPackage -v 10000 -s 100</code></pre>
+                            <div class="card-description">
+                                <p>- Belirtilen uygulama üzerinde rastgele 10.000 olay (dokunma, kaydırma vb.) üretir.
+                                </p>
+                                <p>- Uygulamanın stres testi ve hata tespiti amacıyla kullanılır.</p>
+                            </div>
+                            <div class="card-action">
+                                <button class="copy-btn"
+                                    data-clipboard-text="adb shell monkey -p com.myAppPackage -v 10000 -s 100"><i
+                                        class="fas fa-copy"></i></button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article id="bash-alias" class="note-section">
+                        <h3 class="neon-text">P. Bash Komutları ve Alias Oluşturma</h3>
+                        <div class="command-card glass-morphism">
+                            <pre><code class="language-bash">alias apkinstall="adb devices | tail -n +2 | cut -sf 1 | xargs -I X adb -s X install -r \$1"</code></pre>
+                            <div class="card-description">
+                                <p>- Uygulama Kurulum Alias'ı</p>
+                                <p>- Bağlı tüm cihazlara belirtilen APK'yı kurar.</p>
+                            </div>
+                            <div class="card-action">
+                                <button class="copy-btn" data-clipboard-text="alias apkinstall=\" adb devices | tail -n
+                                    +2 | cut -sf 1 | xargs -I X adb -s X install -r \$1\""><i
+                                        class="fas fa-copy"></i></button>
+                            </div>
+                        </div>
+                        <div class="command-card glass-morphism">
+                            <pre><code class="language-bash">alias rmapp="adb devices | tail -n +2 | cut -sf 1 | xargs -I X adb -s X uninstall \$1"</code></pre>
+                            <div class="card-description">
+                                <p>- Uygulama Kaldırma Alias'ı</p>
+                                <p>- Bağlı tüm cihazlardan belirtilen uygulamayı kaldırır.</p>
+                            </div>
+                            <div class="card-action">
+                                <button class="copy-btn" data-clipboard-text="alias rmapp=\" adb devices | tail -n +2 |
+                                    cut -sf 1 | xargs -I X adb -s X uninstall \$1\""><i
+                                        class="fas fa-copy"></i></button>
+                            </div>
+                        </div>
+                        <div class="command-card glass-morphism">
+                            <pre><code class="language-bash">alias clearapp="adb devices | tail -n +2 | cut -sf 1 | xargs -I X adb -s X shell pm clear \$1"</code></pre>
+                            <div class="card-description">
+                                <p>- Uygulama Verilerini Temizleme Alias'ı</p>
+                                <p>- Bağlı tüm cihazlarda uygulamanın verilerini temizler.</p>
+                            </div>
+                            <div class="card-action">
+                                <button class="copy-btn" data-clipboard-text="alias clearapp=\" adb devices | tail -n +2
+                                    | cut -sf 1 | xargs -I X adb -s X shell pm clear \$1\""><i
+                                        class="fas fa-copy"></i></button>
+                            </div>
+                        </div>
+                        <div class="command-card glass-morphism">
+                            <pre><code class="language-bash">alias startintent="adb devices | tail -n +2 | cut -sf 1 | xargs -I X adb -s X shell am start \$1"</code></pre>
+                            <div class="card-description">
+                                <p>- Intent Başlatma Alias'ı</p>
+                                <p>- Bağlı tüm cihazlarda belirtilen intent'i çalıştırır.</p>
+                            </div>
+                            <div class="card-action">
+                                <button class="copy-btn" data-clipboard-text="alias startintent=\" adb devices | tail -n
+                                    +2 | cut -sf 1 | xargs -I X adb -s X shell am start \$1\""><i
+                                        class="fas fa-copy"></i></button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article id="development-tools" class="note-section">
+                        <h3 class="neon-text">Geliştirme Araçları, Frameworkler ve Mobil İşletim Sistemleri</h3>
+
+                        <div class="command-card glass-morphism">
+                            <h4>A. Entegre Geliştirme Ortamları (IDE'ler)</h4>
+                            <p>Listelenen IDE ve Editörler:</p>
+                            <ul>
+                                <li>Android Studio</li>
+                                <li>Visual Studio</li>
+                                <li>RAD Studio</li>
+                                <li>Eclipse</li>
+                                <li>Flutter</li>
+                                <li>Xcode</li>
+                                <li>VSCode</li>
+                                <li>Cursor</li>
+                                <li>React Native</li>
+                                <li>NetBeans</li>
+                                <li>Atom</li>
+                                <li>JetBrains IntelliJ IDEA</li>
+                                <li>JetBrains PyCharm</li>
+                            </ul>
+                        </div>
+
+                        <div class="command-card glass-morphism">
+                            <h4>B. Framework ve Çapraz Platform Uygulama Geliştirme</h4>
+                            <p>Framework Nedir?</p>
+                            <p>Uygulama geliştirmeyi kolaylaştıran, yapı ve kütüphanelerin toplandığı altyapıdır.</p>
+
+                            <h5>Popüler Çapraz Platform Frameworkleri:</h5>
+
+                            <h4>Flutter:</h4>
+                            <ul>
+                                <li>Dil: Dart</li>
+                                <li>Örnek Uygulamalar: eBay, Alibaba, Google Pay, ByteDance</li>
+                            </ul>
+
+                            <h4>React Native:</h4>
+                            <ul>
+                                <li>Dil: JavaScript</li>
+                                <li>Örnek Uygulamalar: Microsoft Office, Skype, Xbox Game Pass, Facebook, Desktop
+                                    Messenger, Oculus</li>
+                            </ul>
+
+                            <h4>Kotlin Multiplatform:</h4>
+                            <ul>
+                                <li>Dil: Kotlin</li>
+                                <li>Örnek Uygulamalar: McDonald's, Netflix, Forbes, 9GAG, Cash App, Philips</li>
+                            </ul>
+
+                            <h4>Ionic:</h4>
+                            <ul>
+                                <li>Dil: JavaScript</li>
+                                <li>Örnek Uygulamalar: T-Mobile, BBC (Çocuk ve Eğitim Uygulamaları), EA Games</li>
+                            </ul>
+
+                            <h4>.Net MAUI:</h4>
+                            <ul>
+                                <li>Diller: C#, XAML</li>
+                                <li>Örnek Uygulamalar: NBC Sports Next, Escola Agil, Irth Solutions</li>
+                            </ul>
+
+                            <h4>NativeScript:</h4>
+                            <ul>
+                                <li>Diller: JavaScript, TypeScript</li>
+                                <li>Örnek Uygulamalar: Daily Nanny, Strudel, Breethe</li>
+                            </ul>
+                        </div>
+
+                        <div class="command-card glass-morphism">
+                            <h4>C. Mobil İşletim Sistemleri</h4>
+
+                            <h5>Android:</h5>
+                            <ul>
+                                <li><strong>Geliştirici:</strong> Google</li>
+                                <li><strong>Kullanılan Cihazlar:</strong> Telefon, Tablet, Wearable, TV, Otomotiv, PC
+                                </li>
+                                <li><strong>Özellikler:</strong> Açık kaynaklı, geniş cihaz yelpazesi,
+                                    özelleştirilebilir arayüz</li>
+                                <li><strong>Programlama Dilleri:</strong> Dart (Flutter), Kotlin, Java, C++, C#
+                                    (MAUI/Xamarin), Python</li>
+                                <li><strong>Kullanılan IDE'ler:</strong> Android Studio, ayrıca VSCode, Visual Studio,
+                                    RAD Studio, IntelliJ IDEA gibi çapraz platform araçları.</li>
+                            </ul>
+
+                            <h5>iOS:</h5>
+                            <ul>
+                                <li><strong>Geliştirici:</strong> Apple Inc.</li>
+                                <li><strong>Kullanılan Cihazlar:</strong> iPhone, iPad, iPod Touch</li>
+                                <li><strong>Özellikler:</strong> Güvenli, kullanıcı dostu arayüz, Apple ekosistemine
+                                    sıkı entegrasyon</li>
+                                <li><strong>Programlama Dilleri:</strong> Dart (Flutter), Swift, Objective-C, C#
+                                    (MAUI/Xamarin)</li>
+                                <li><strong>Ana IDE:</strong> Xcode (çapraz platform geliştirme seçenekleri de mevcut).
+                                </li>
+                            </ul>
+                        </div>
+                    </article>
+                </div>
+
+                <!-- Right Column - Navigation -->
+                <div class="right-column">
+                    <!-- İçindekiler -->
+                    <nav class="notes-toc hud-nav glass-morphism" style="padding: 20px;">
+                        <div class="hud-header">
+                            <span class="hud-title">Komut Kategorileri</span>
+                            <div class="hud-dots">
+                                <div class="dot dot1"></div>
+                                <div class="dot dot2"></div>
+                                <div class="dot dot3"></div>
+                            </div>
+                        </div>
+                        <ul>
+                            <li><a href="#adb-sunucu" class="neon-link"><i class="fas fa-server"></i> ADB Sunucu
+                                    Yönetimi</a></li>
+                            <li><a href="#adb-yeniden-baslatma" class="neon-link"><i class="fas fa-redo"></i> ADB
+                                    Yeniden Başlatma Komutları</a></li>
+                            <li><a href="#adb-shell" class="neon-link"><i class="fas fa-terminal"></i> ADB Shell ve
+                                    Cihaz Üzerinde Komut Çalıştırma</a></li>
+                            <li><a href="#cihaz-baglanti" class="neon-link"><i class="fas fa-mobile-alt"></i> Cihaz
+                                    Bağlantısı ve Bilgi Alma</a></li>
+                            <li><a href="#logcat" class="neon-link"><i class="fas fa-clipboard-list"></i> Logcat ve Hata
+                                    Raporlama</a></li>
+                            <li><a href="#dosya-transferi" class="neon-link"><i class="fas fa-exchange-alt"></i> Dosya
+                                    Transferi Komutları</a></li>
+                            <li><a href="#uygulama-kurma" class="neon-link"><i class="fas fa-download"></i> Uygulama
+                                    Kurma ve Kaldırma</a></li>
+                            <li><a href="#aktivite" class="neon-link"><i class="fas fa-play"></i> Aktivite Yönetimi ve
+                                    Intent İşlemleri</a></li>
+                            <li><a href="#izin-yonetimi" class="neon-link"><i class="fas fa-lock"></i> İzin Yönetimi ve
+                                    Cihaz Emülasyonu</a></li>
+                            <li><a href="#metin-girisi" class="neon-link"><i class="fas fa-keyboard"></i> Metin Girişi
+                                    ve Klavye Olayları</a></li>
+                            <li><a href="#ekran-goruntusu" class="neon-link"><i class="fas fa-camera"></i> Ekran
+                                    Görüntüsü Alma ve Video Kaydı</a></li>
+                            <li><a href="#yedekleme" class="neon-link"><i class="fas fa-save"></i> Yedekleme, Geri
+                                    Yükleme ve Sideload İşlemleri</a></li>
+                            <li><a href="#fastboot" class="neon-link"><i class="fas fa-bolt"></i> Fastboot Komutları</a>
+                            </li>
+                            <li><a href="#shared-pref" class="neon-link"><i class="fas fa-cog"></i> Shared Preferences
+                                    İşlemleri</a></li>
+                            <li><a href="#monkey" class="neon-link"><i class="fas fa-grin-tongue"></i> Monkey Test
+                                    Aracı</a></li>
+                            <li><a href="#bash-alias" class="neon-link"><i class="fas fa-terminal"></i> Bash Komutları
+                                    ve Alias Oluşturma</a></li>
+                            <li><a href="#development-tools" class="neon-link"><i class="fas fa-tools"></i> Geliştirme
+                                    Araçları, Frameworkler ve Mobil İşletim Sistemleri
+                                </a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </section>
+    </main>
+    <!-- Update highlight.js with proper version and security settings -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/bash.min.js"></script>
+    <script>
+        // Initialize highlight.js with security settings
+        document.addEventListener('DOMContentLoaded', () => {
+            // Configure highlight.js to escape HTML and use secure options
+            hljs.configure({
+                languages: ['bash'],
+                ignoreUnescapedHTML: true  // Explicitly acknowledge the security implications
+            });
+            
+            // Use the non-deprecated highlightElement method instead of highlightBlock
+            document.querySelectorAll('pre code').forEach((el) => {
+                // Sanitize code content to prevent HTML injection
+                el.textContent = el.textContent;
+                hljs.highlightElement(el);
+            });
+        });
+    </script>
+    <script src="js/particles.js"></script>
+    <script src="js/script.js"></script>
+    <!-- Add mobile menu toggle script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuToggle = document.querySelector('.menu-toggle');
+            const menu = document.querySelector('.menu');
+            const categoryToggle = document.querySelector('.category-toggle');
+            const notesToc = document.querySelector('.notes-toc');
+            
+            if (menuToggle && menu) {
+                menuToggle.addEventListener('click', function() {
+                    menu.classList.toggle('active');
+                });
+            }
+            
+            // Add toggle functionality for categories
+            if (categoryToggle && notesToc) {
+                // On mobile, start with collapsed categories
+                if (window.innerWidth <= 992) {
+                    notesToc.classList.remove('active');
+                } else {
+                    notesToc.classList.add('active');
+                }
+                
+                categoryToggle.addEventListener('click', function() {
+                    notesToc.classList.toggle('active');
+                    
+                    // Change icon based on state
+                    const icon = categoryToggle.querySelector('i');
+                    if (notesToc.classList.contains('active')) {
+                        icon.className = 'fas fa-chevron-up';
+                    } else {
+                        icon.className = 'fas fa-list';
+                    }
+                });
+            }
+            
+            // Initialize clipboard.js
+            const clipboard = new ClipboardJS('.copy-btn');
+            
+            clipboard.on('success', function(e) {
+                // Visual feedback on copy
+                const originalHTML = e.trigger.innerHTML;
+                e.trigger.innerHTML = '<i class="fas fa-check"></i>';
+                
+                setTimeout(function() {
+                    e.trigger.innerHTML = originalHTML;
+                }, 1500);
+                
+                e.clearSelection();
+            });
+            
+            // Handle screen resize
+            window.addEventListener('resize', function() {
+                if (notesToc) {
+                    if (window.innerWidth <= 992 && !categoryToggle.hasAttribute('data-clicked')) {
+                        notesToc.classList.remove('active');
+                    } else if (window.innerWidth > 992) {
+                        notesToc.classList.add('active');
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

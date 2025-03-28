@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Mobil Uygulama Geliştirme dersi - Ana Sayfa">
+  <title>Ana Sayfa</title>
+  <link rel="stylesheet" href="css/style.css">
+  <!-- Optional: Include Font Awesome if you want the moon/sun icons -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  
+  <!-- Add responsive styles for menu -->
+  <style>
+    /* Mobile menu styles */
+    @media (max-width: 768px) {
+      header nav {
+        width: 100%;
+      }
+      
+      header nav ul.menu {
+        flex-direction: column;
+        width: 100%;
+        display: none;
+      }
+      
+      header nav ul.menu li {
+        width: 100%;
+        text-align: center;
+        padding: 10px 0;
+      }
+      
+      .menu-toggle {
+        display: block;
+        cursor: pointer;
+        padding: 10px;
+        background: transparent;
+        border: none;
+        color: inherit;
+        font-size: 1rem;
+      }
+      
+      .menu.active {
+        display: flex;
+      }
+    }
+    
+    /* Ensure menu toggle is hidden on larger screens */
+    @media (min-width: 769px) {
+      .menu-toggle {
+        display: none;
+      }
+      
+      header nav ul.menu {
+        display: flex;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Added dark mode toggle element -->
+  <div class="theme-toggle">
+    <i class="fas fa-moon"></i>
+    <i class="fas fa-sun"></i>
+    <div class="toggle-ball"></div>
+  </div>
+
+  <header>
+    <button class="menu-toggle"><i class="fas fa-bars"></i> Menü</button>
+    <nav>
+      <ul class="menu">
+        <li><a href="index.html" class="active">Ana Sayfa</a></li>
+        <li><a href="mobil-uygulama-gelistirme.html">Mobil Uygulama Geliştirme</a></li>
+      </ul>
+    </nav>
+  </header>
+  
+  <main>
+    <h1>Hoş geldiniz!</h1>
+    <p>Bu site, derslerimizi içeren interaktif bir platformdur.</p>
+  </main>
+  
+  <footer>
+    <p>&copy; 2025 Tüm Hakları Saklıdır.</p>
+  </footer>
+  
+  <script src="js/script.js"></script>
+  
+  <!-- Add mobile menu toggle script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const menuToggle = document.querySelector('.menu-toggle');
+      const menu = document.querySelector('.menu');
+      
+      if (menuToggle && menu) {
+        menuToggle.addEventListener('click', function() {
+          menu.classList.toggle('active');
+        });
+      }
+    });
+  </script>
+</body>
+</html>
